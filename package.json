@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "set NODE_ENV=production && node ./build/bin/www.js",
-    "build": "rm -rf ./build && tsc && ts-node ./copies.ts",
-    "build-on-windows": "npm run lint && rmdir /s /q build && tsc && ts-node ./copies.ts",
+    "build": "npm run lint && tsc && ts-node ./copies.ts",
+    "build-on-windows": "npm run lint && tsc && ts-node ./copies.ts",
     "dev": "nodemon ./src/bin/www.ts",
     "lint": "eslint ./src/**/*.ts",
     "fix": "eslint ./src/**/*.ts --fix"
