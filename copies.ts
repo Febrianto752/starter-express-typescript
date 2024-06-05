@@ -1,31 +1,33 @@
-import fs from "fs-extra";
+import fs from 'fs-extra';
 
-async function copyFolder(source: string, destination: string) {
+type Folders = [{ source: string; destination: string }];
+
+async function copyFolder(folders: Folders) {
   try {
-    // Mengecek apakah folder sumber ada
-    const sourceExists = await fs.pathExists(source);
-    if (!sourceExists) {
-      console.error(`Folder source '${source}' not found.`);
-      return;
-    }
+    folders.forEach(async (folder) => {
+      // Mengecek apakah folder sumber ada
+      const sourceExists = await fs.pathExists(folder.source);
+      if (!sourceExists) {
+        console.error(`Folder source '${folder.source}' not found.`);
+        return;
+      }
 
-    // Menyalin seluruh isi folder ke destination
-    await fs.copy(source, destination, { overwrite: true });
+      // Menyalin seluruh isi folder ke destination
+      await fs.copy(folder.source, folder.destination, { overwrite: true });
+    });
 
-    console.log("Folder copied successfully!");
+    console.log('Folder copied successfully!');
   } catch (err) {
-    console.error("Error copying folder:", err);
+    console.error('Error copying folder:', err);
   }
 }
 
-const folders = [
+const folders: Folders = [
   {
-    source: "src/public",
-    dest: "build/public",
-  },
+    source: 'src/public',
+    destination: 'build/public'
+  }
   // tambahkan folder selain typescript yg mau di copy
 ];
 
-folders.forEach((folder) => {
-  copyFolder(folder.source, folder.dest);
-});
+copyFolder(folders);
