@@ -1,0 +1,1 @@
+! script 'first-build' dijalankan pertama kali, script ini digunakan untuk membuat folder 'build'
