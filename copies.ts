@@ -1,6 +1,8 @@
 import fs from 'fs-extra';
 
-type Folders = [{ source: string; destination: string }];
+type SourceDestination = { source: string; destination: string };
+
+type Folders = SourceDestination[];
 
 async function copyFolder(folders: Folders) {
   try {
